@@ -13,7 +13,6 @@ display_errors = On
 EOF
 fi
 
-
 # Create a default config
 if [ ! -f /var/www/html/conf/conf.php ]; then
 	echo "###### Creating /var/www/html/conf/conf.php"
@@ -65,8 +64,8 @@ if [ ! -f /var/www/html/conf/conf.php ]; then
 		\$dolibarr_mailing_limit_sendbyweb='0';
 		EOF
 
-	chown apache:root /var/www/html/conf/conf.php
-	chmod 640 /var/www/html/conf/conf.php
+	#chown apache:root /var/www/html/conf/conf.php
+	#chmod 640 /var/www/html/conf/conf.php
 fi
 
 exec apache2-foreground
