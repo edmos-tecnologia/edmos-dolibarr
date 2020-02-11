@@ -108,9 +108,14 @@ WORKDIR /var/www/html
 
 EXPOSE 80/tcp
 
-COPY /docker/docker-entrypoint /usr/local/bin/
-COPY /docker/apache2-foreground /usr/local/bin/
+#COPY /docker/docker-entrypoint /usr/local/bin/
+#ENTRYPOINT ["/usr/local/bin/docker-entrypoint"]
 
-USER root
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint"]
-CMD ["/usr/local/bin/apache2-foreground"]
+#COPY /docker/apache2-foreground /usr/local/bin/
+#CMD ["/usr/local/bin/apache2-foreground"]
+
+COPY /docker/docker-entrypoint /usr/src/dolibarr/entrypoint
+ENTRYPOINT ["/usr/src/dolibarr/docker-entrypoint"]
+
+COPY /docker/apache2-foreground /usr/src/dolibarr/entrypoint
+CMD ["/usr/src/dolibarr/apache2-foreground"]
