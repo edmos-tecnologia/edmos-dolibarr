@@ -108,6 +108,6 @@ EXPOSE 80/tcp
 
 #COPY docker/apache2-foreground /usr/local/bin/
 #CMD ["apache2-foreground"]
-COPY docker/ /usr/local/bin/
+COPY docker/* /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["apache2-foreground"]
