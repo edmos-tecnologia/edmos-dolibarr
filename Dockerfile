@@ -91,11 +91,11 @@ VOLUME /var/www/documents
 #COPY htdocs/ /tmp/dolibarr
 #COPY scripts/ /tmp/dolibarr/scripts
 
-COPY doc/ /var/www/
+COPY doc/ /var/www/doc
 COPY htdocs/ /var/www/html
-COPY scripts/ /var/www/
+COPY scripts/ /var/www/scripts
 
-RUN chmod +x COPY scripts/ /var/www/scripts/*
+RUN chmod +x /var/www/scripts/*
 
 #RUN set -eux; \
 	#unzip -q /tmp/dolibarr.zip -d /tmp/dolibarr; \
