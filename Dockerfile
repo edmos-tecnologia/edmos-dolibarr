@@ -114,8 +114,8 @@ EXPOSE 80/tcp
 #COPY /docker/apache2-foreground /usr/local/bin/
 #CMD ["/usr/local/bin/apache2-foreground"]
 
-COPY /docker/docker-entrypoint /usr/src/dolibarr/entrypoint/docker-entrypoint.sh
-ENTRYPOINT ["/usr/src/dolibarr/entrypoint/docker-entrypoint.sh"]
+COPY /docker/docker-entrypoint /usr/local/bin/docker-entrypoint.sh
+ENTRYPOINT ["docker-entrypoint.sh"]
 
-COPY /docker/apache2-foreground /usr/src/dolibarr/entrypoint/apache2-foreground.sh
-CMD ["/usr/src/dolibarr/entrypoint/apache2-foreground.sh"]
+COPY /docker/apache2-foreground /usr/local/bin/apache2-foreground.sh
+CMD ["apache2-foreground.sh"]
