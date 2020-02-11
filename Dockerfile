@@ -91,11 +91,10 @@ VOLUME /var/www/documents
 #COPY htdocs/ /tmp/dolibarr
 #COPY scripts/ /tmp/dolibarr/scripts
 
-COPY doc/ /var/www/doc
-COPY htdocs/ /var/www/html
-COPY scripts/ /var/www/scripts
+COPY htdocs/ /usr/src/dolibarr/htdocs
+COPY scripts/ /usr/src/dolibarr/scripts
 
-RUN chmod +x /var/www/scripts/*
+RUN chmod +x /usr/src/dolibarr/scripts/*
 
 #RUN set -eux; \
 	#unzip -q /tmp/dolibarr.zip -d /tmp/dolibarr; \
@@ -109,8 +108,8 @@ WORKDIR /var/www/html
 
 EXPOSE 80/tcp
 
-COPY docker/docker-entrypoint /usr/local/bin
-ENTRYPOINT ["docker-entrypoint"]
+COPY /docker/docker-entrypoint /usr/local/bin/
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint"]
 
-COPY docker/apache2-foreground /usr/local/bin
-CMD ["apache2-foreground"]
+COPY /docker/apache2-foreground /usr/local/bin/
+CMD ["/usr/local/bin/apache2-foreground"]
