@@ -1,5 +1,7 @@
 #!/bin/bash -eux
 
+echo "###### Start Entrypoint...."
+
 # version_greater A B returns whether A > B
 function version_greater() {
 	[[ "$(printf '%s\n' "$@" | sort -nt. | head -n 1)" != "$1" ]];
@@ -18,13 +20,24 @@ function run_as() {
 	fi
 }
 
+echo "###### Verifying /var/www/documents"
+
 if [ ! -d /var/www/documents ]; then
+	echo "###### Creating /var/www/documents"
 	mkdir -p /var/www/documents
 fi
 
+echo "###### /var/www/documents OK"
+
+echo "###### Change permissions for directory /var/www "
+
 chown -R apache:root /var/www
 
+echo "###### Permissions for directory /var/www changed"
+
+echo "###### Verifying php.ini"
 if [ ! -f /etc/php7/php.ini ]; then
+	echo "###### Creating php.ini"
 	cat <<-EOF > /etc/php7/php.ini
 		date.timezone = "${PHP_INI_DATE_TIMEZONE}"
 		memory_limit = "${PHP_MEMORY_LIMIT}"
@@ -34,7 +47,12 @@ if [ ! -f /etc/php7/php.ini ]; then
 		EOF
 fi
 
+echo "###### php.ini OK"
+
+echo "###### Verifying /var/www/html/conf"
+
 if [ ! -d /var/www/html/conf ]; then
+	echo "###### Creating /var/www/html/conf"
 	mkdir -p /var/www/html/conf
 	chown apache:root /var/www/html/conf
 	chmod 750 /var/www/html/conf
@@ -42,6 +60,7 @@ fi
 
 # Create a default config
 if [ ! -f /var/www/html/conf/conf.php ]; then
+	echo "###### Creating /var/www/html/conf/conf.php"
 	cat <<-EOF > /var/www/html/conf/conf.php
 		<?php
 		// Config file for Dolibarr ${DOLI_VERSION} ($(date))
@@ -94,7 +113,7 @@ if [ ! -f /var/www/html/conf/conf.php ]; then
 	chmod 640 /var/www/html/conf/conf.php
 fi
 
-# Detect installed version (docker specific solution)
+echo "# Detect installed version (docker specific solution)"
 installed_version="0.0.0~unknown"
 if [ -f /var/www/documents/install.version ]; then
 	installed_version=$(cat /var/www/documents/install.version)
@@ -106,7 +125,7 @@ if version_greater "$installed_version" "$image_version"; then
 	exit 1
 fi
 
-# Initialize image
+echo "# Initialize image"
 if version_greater "$image_version" "$installed_version"; then
 	echo "Dolibarr initialization..."
 	if [[ $EUID -eq 0 ]]; then
