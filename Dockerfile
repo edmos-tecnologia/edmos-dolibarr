@@ -39,8 +39,8 @@ ENV DOLI_HTTPS 0
 ENV DOLI_PROD 0
 ENV DOLI_NO_CSRF_CHECK 0
 
-#ENV PHP_INI_DATE_TIMEZONE 'Europe/Paris'
-ENV PHP_INI_DATE_TIMEZONE 'America/São Paulo'
+ENV PHP_INI_DATE_TIMEZONE 'Europe/Paris'
+#ENV PHP_INI_DATE_TIMEZONE 'America/São Paulo'
 ENV PHP_MEMORY_LIMIT 256M
 ENV PHP_MAX_UPLOAD 20M
 ENV PHP_MAX_EXECUTION_TIME 300
@@ -87,27 +87,30 @@ VOLUME /var/www/documents
 #ADD https://github.com/Dolibarr/dolibarr/archive/${DOLI_VERSION}.zip /tmp/dolibarr.zip
 #COPY /dolibarr-${DOLI_VERSION}.zip /tmp/dolibarr.zip
 
-COPY doc/ /tmp/dolibarr/doc
-COPY htdocs/ /tmp/dolibarr
-COPY scripts/ /tmp/dolibarr/scripts
+#COPY doc/ /tmp/dolibarr/doc
+#COPY htdocs/ /tmp/dolibarr
+#COPY scripts/ /tmp/dolibarr/scripts
 
-RUN set -eux; \
+COPY doc/ /var/www/
+COPY htdocs/ /var/www/html
+COPY scripts/ /var/www/
+
+RUN chmod +x COPY scripts/ /var/www/scripts/*
+
+#RUN set -eux; \
 	#unzip -q /tmp/dolibarr.zip -d /tmp/dolibarr; \
 	#rm -f /tmp/dolibarr.zip; \
-	mkdir -p /usr/src/dolibarr; \
-	cp -r /tmp/dolibarr/* /usr/src/dolibarr; \
-	rm -rf /tmp/dolibarr; \
-	chmod +x /usr/src/dolibarr/scripts/*
+#	mkdir -p /usr/src/dolibarr; \
+#	cp -r /tmp/dolibarr/* /usr/src/dolibarr; \
+#	rm -rf /tmp/dolibarr; \
+#	chmod +x /usr/src/dolibarr/scripts/*
 
 WORKDIR /var/www/html
 
 EXPOSE 80/tcp
 
-#COPY docker/docker-entrypoint /usr/local/bin/
-#ENTRYPOINT ["docker-entrypoint"]
-
-#COPY docker/apache2-foreground /usr/local/bin/
-#CMD ["apache2-foreground"]
-COPY docker/* /usr/local/bin/
+COPY docker/docker-entrypoint /usr/local/bin
 ENTRYPOINT ["docker-entrypoint"]
+
+COPY docker/apache2-foreground /usr/local/bin
 CMD ["apache2-foreground"]
