@@ -9,7 +9,7 @@ chmod g+rwx /var/www/html/conf
 if [ ! -f /usr/local/etc/php/php.ini ]; then
   cat <<EOF > /usr/local/etc/php/php.ini
 date.timezone = $PHP_INI_DATE_TIMEZONE
-display_errors = On
+display_errors = Off
 EOF
 fi
 
