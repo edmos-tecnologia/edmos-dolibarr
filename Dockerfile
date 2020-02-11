@@ -109,7 +109,8 @@ WORKDIR /var/www/html
 EXPOSE 80/tcp
 
 COPY /docker/docker-entrypoint /usr/local/bin/
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint"]
-
 COPY /docker/apache2-foreground /usr/local/bin/
+
+USER root
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint"]
 CMD ["/usr/local/bin/apache2-foreground"]
