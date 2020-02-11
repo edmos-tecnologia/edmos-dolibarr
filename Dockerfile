@@ -87,9 +87,9 @@ VOLUME /var/www/documents
 #ADD https://github.com/Dolibarr/dolibarr/archive/${DOLI_VERSION}.zip /tmp/dolibarr.zip
 #COPY /dolibarr-${DOLI_VERSION}.zip /tmp/dolibarr.zip
 
-COPY doc/ /tmp/dolibarr
+COPY doc/ /tmp/dolibarr/doc
 COPY htdocs/ /tmp/dolibarr
-COPY scripts/ /tmp/dolibarr
+COPY scripts/ /tmp/dolibarr/scripts
 
 RUN set -eux; \
 	#unzip -q /tmp/dolibarr.zip -d /tmp/dolibarr; \
@@ -103,8 +103,8 @@ WORKDIR /var/www/html
 
 EXPOSE 80/tcp
 
-COPY /src/docker-entrypoint /usr/local/bin/
+COPY /docker/docker-entrypoint /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint"]
 
-COPY /src/apache2-foreground /usr/local/bin/
+COPY /docker/apache2-foreground /usr/local/bin/
 CMD ["apache2-foreground"]
