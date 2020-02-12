@@ -1,10 +1,9 @@
 #!/bin/bash
 
-#usermod -u $HOST_USER_ID www-data
-#groupmod -g $HOST_USER_ID www-data
+usermod -u $HOST_USER_ID www-data
+groupmod -g $HOST_USER_ID www-data
 
 chgrp -hR www-data /var/www/html
-chmod g+rwx /var/www/html/conf
 
 if [ ! -f /usr/local/etc/php/php.ini ]; then
 	cat <<-EOF > /usr/local/etc/php/php.ini
@@ -24,21 +23,23 @@ if [ ! -f /usr/local/etc/php/php.ini ]; then
     xdebug.remote_connect_back=0
     xdebug.profiler_enable=0
     xdebug.remote_log="/tmp/xdebug.log"
-    
 		EOF
 fi
 
+echo "###### Creating dir /var/www/html/conf/"
 rm -r /var/www/html/conf
 
 #if [ ! -d /var/www/html/conf ]; then
 	mkdir -p /var/www/html/conf
-	chown apache:root /var/www/html/conf
-	chmod 750 /var/www/html/conf
+  chmod g+rwx /var/www/html/conf
+#	chown apache:root /var/www/html/conf
+#	chmod 750 /var/www/html/conf
 #fi
 
 # Create a default config
 if [ ! -f /var/www/html/conf/conf.php ]; then
 	echo "###### Creating /var/www/html/conf/conf.php"
+
 	cat <<-EOF > /var/www/html/conf/conf.php
 		<?php
 		// Config file for Dolibarr ${DOLI_VERSION} ($(date))
@@ -87,8 +88,8 @@ if [ ! -f /var/www/html/conf/conf.php ]; then
 		\$dolibarr_mailing_limit_sendbyweb='0';
 		EOF
 
-	chown apache:root /var/www/html/conf/conf.php
-	chmod 666 /var/www/html/conf/conf.php
+	#chown apache:root /var/www/html/conf/conf.php
+	chmod 7777 /var/www/html/conf/conf.php
 fi
 
 if [ ! -f /var/www/documents/install.lock ]; then
