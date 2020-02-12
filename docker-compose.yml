@@ -9,8 +9,8 @@ services:
         networks:
             - default
         environment: 
-#            MYSQL_DATABASE: edmerpdb
-#            MYSQL_USER: edmoserp
+            MYSQL_DATABASE: edmerpdb
+            MYSQL_USER: edmoserp
             MYSQL_PASSWORD: edmoserp@2020
             MYSQL_ROOT_PASSWORD: admin@123
         volumes: 
