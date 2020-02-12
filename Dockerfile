@@ -66,16 +66,16 @@ RUN chmod +x /usr/local/bin/docker-run.sh
 
 COPY htdocs/ /var/www/html
 
-RUN pecl install xdebug && docker-php-ext-enable xdebug
-RUN echo 'zend_extension="/usr/local/lib/php/extensions/no-debug-non-zts-20151012/xdebug.so"' >> /usr/local/etc/php/php.ini
-RUN echo 'xdebug.remote_autostart=0' >> /usr/local/etc/php/php.ini
-RUN echo 'xdebug.remote_enable=1' >> /usr/local/etc/php/php.ini
-RUN echo 'xdebug.default_enable=0' >> /usr/local/etc/php/php.ini
-RUN echo 'xdebug.remote_host=docker.host' >> /usr/local/etc/php/php.ini
-RUN echo 'xdebug.remote_port=9000' >> /usr/local/etc/php/php.ini
-RUN echo 'xdebug.remote_connect_back=0' >> /usr/local/etc/php/php.ini
-RUN echo 'xdebug.profiler_enable=0' >> /usr/local/etc/php/php.ini
-RUN echo 'xdebug.remote_log="/tmp/xdebug.log"' >> /usr/local/etc/php/php.ini
+#RUN pecl install xdebug && docker-php-ext-enable xdebug
+#RUN echo 'zend_extension="/usr/local/lib/php/extensions/no-debug-non-zts-20151012/xdebug.so"' >> /usr/local/etc/php/php.ini
+#RUN echo 'xdebug.remote_autostart=0' >> /usr/local/etc/php/php.ini
+#RUN echo 'xdebug.remote_enable=1' >> /usr/local/etc/php/php.ini
+#RUN echo 'xdebug.default_enable=0' >> /usr/local/etc/php/php.ini
+#RUN echo 'xdebug.remote_host=docker.host' >> /usr/local/etc/php/php.ini
+#RUN echo 'xdebug.remote_port=9000' >> /usr/local/etc/php/php.ini
+#RUN echo 'xdebug.remote_connect_back=0' >> /usr/local/etc/php/php.ini
+#RUN echo 'xdebug.profiler_enable=0' >> /usr/local/etc/php/php.ini
+#RUN echo 'xdebug.remote_log="/tmp/xdebug.log"' >> /usr/local/etc/php/php.ini
 RUN echo '172.17.0.1 docker.host' >> /etc/hosts
 
 EXPOSE 80
