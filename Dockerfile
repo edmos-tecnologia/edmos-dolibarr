@@ -45,47 +45,18 @@ ENV PHP_MEMORY_LIMIT 256M
 ENV PHP_MAX_UPLOAD 20M
 ENV PHP_MAX_EXECUTION_TIME 300
 
-#RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libldap2-dev libzip-dev zlib1g-dev libicu-dev g++\
-#	&& rm -rf /var/lib/apt/lists/* \
+RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libldap2-dev libzip-dev zlib1g-dev libicu-dev g++\
+	&& rm -rf /var/lib/apt/lists/* \
 	#&& docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
-#	&& docker-php-ext-install gd \
-#	&& docker-php-ext-install zip \
-#	&& docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
-#        && docker-php-ext-install ldap \
-#        && docker-php-ext-install mysqli \
-#        && docker-php-ext-install calendar \
-#        && docker-php-ext-configure intl \
-#        && docker-php-ext-install intl \
-#        && apt-get autoremove --purge -y libjpeg-dev libldap2-dev zlib1g-dev libicu-dev g++
-
-RUN apk add --no-cache \
-		bash \
-		openssl \
-		rsync \
-		apache2 \
-		php7-apache2 \
-		php7-session \
-		php7-mysqli \
-		php7-pgsql \
-		php7-ldap \
-		php7-mcrypt \
-		php7-openssl \
-		php7-mbstring \
-		php7-intl \
-		php7-gd \
-		php7-imagick \
-		php7-soap \
-		php7-curl \
-		php7-calendar \
-		php7-xml \
-		php7-zip \
-		php7-tokenizer \
-		php7-simplexml \
-		php7 \
-		mariadb-client \
-		postgresql-client \
-		unzip \
-	; \
+	&& docker-php-ext-install gd \
+	&& docker-php-ext-install zip \
+	&& docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
+        && docker-php-ext-install ldap \
+        && docker-php-ext-install mysqli \
+        && docker-php-ext-install calendar \
+        && docker-php-ext-configure intl \
+        && docker-php-ext-install intl \
+        && apt-get autoremove --purge -y libjpeg-dev libldap2-dev zlib1g-dev libicu-dev g++
 
 RUN mkdir /var/documents
 RUN chown www-data /var/documents
