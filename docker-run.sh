@@ -1,7 +1,7 @@
 #!/bin/bash
 
-usermod -u $HOST_USER_ID www-data
-groupmod -g $HOST_USER_ID www-data
+#usermod -u $HOST_USER_ID www-data
+#groupmod -g $HOST_USER_ID www-data
 
 chgrp -hR www-data /var/www/html
 chmod g+rwx /var/www/html/conf
@@ -30,11 +30,11 @@ fi
 
 rm -r /var/www/html/conf
 
-if [ ! -d /var/www/html/conf ]; then
+#if [ ! -d /var/www/html/conf ]; then
 	mkdir -p /var/www/html/conf
 	chown apache:root /var/www/html/conf
 	chmod 750 /var/www/html/conf
-fi
+#fi
 
 # Create a default config
 if [ ! -f /var/www/html/conf/conf.php ]; then
