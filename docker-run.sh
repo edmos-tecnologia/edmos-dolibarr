@@ -13,8 +13,10 @@ chmod g+rwx /var/www/html/conf
 #EOF
 #fi
 
-if [ ! -f /etc/php7/php.ini ]; then
-	cat <<-EOF > /etc/php7/php.ini
+#if [ ! -f /etc/php7/php.ini ]; then
+#	cat <<-EOF > /etc/php7/php.ini
+if [ ! -f /usr/local/etc/php/php.ini ]; then
+	cat <<-EOF > /usr/local/etc/php/php.ini
 		date.timezone = "${PHP_INI_DATE_TIMEZONE}"
 		memory_limit = "${PHP_MEMORY_LIMIT}"
 		upload_max_filesize = "${PHP_MAX_UPLOAD}"
