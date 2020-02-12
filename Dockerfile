@@ -57,7 +57,7 @@ RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libldap2-dev lib
         && docker-php-ext-configure intl \
         && docker-php-ext-install intl \
         #&& apt-get autoremove --purge -y libjpeg-dev libldap2-dev zlib1g-dev libicu-dev g++
-
+;
 RUN mkdir /var/documents
 RUN chown www-data /var/documents
 
