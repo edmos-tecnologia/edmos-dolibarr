@@ -6,15 +6,6 @@ groupmod -g $HOST_USER_ID www-data
 chgrp -hR www-data /var/www/html
 chmod g+rwx /var/www/html/conf
 
-#if [ ! -f /usr/local/etc/php/php.ini ]; then
-#  cat <<EOF > /usr/local/etc/php/php.ini
-#date.timezone = $PHP_INI_DATE_TIMEZONE
-#display_errors = Off
-#EOF
-#fi
-
-#if [ ! -f /etc/php7/php.ini ]; then
-#	cat <<-EOF > /etc/php7/php.ini
 if [ ! -f /usr/local/etc/php/php.ini ]; then
 	cat <<-EOF > /usr/local/etc/php/php.ini
 		date.timezone = "${PHP_INI_DATE_TIMEZONE}"
@@ -22,7 +13,27 @@ if [ ! -f /usr/local/etc/php/php.ini ]; then
 		upload_max_filesize = "${PHP_MAX_UPLOAD}"
 		max_execution_time = "${PHP_MAX_EXECUTION_TIME}"
 		sendmail_path = /usr/sbin/sendmail -t -i
+    display_errors = Off
+
+    zend_extension="/usr/local/lib/php/extensions/no-debug-non-zts-20151012/xdebug.so"
+    xdebug.remote_autostart=0
+    xdebug.remote_enable=1
+    xdebug.default_enable=0
+    xdebug.remote_host=docker.host
+    xdebug.remote_port=9000
+    xdebug.remote_connect_back=0
+    xdebug.profiler_enable=0
+    xdebug.remote_log="/tmp/xdebug.log"
+    
 		EOF
+fi
+
+rm -r /var/www/html/conf
+
+if [ ! -d /var/www/html/conf ]; then
+	mkdir -p /var/www/html/conf
+	chown apache:root /var/www/html/conf
+	chmod 750 /var/www/html/conf
 fi
 
 # Create a default config
@@ -76,7 +87,7 @@ if [ ! -f /var/www/html/conf/conf.php ]; then
 		\$dolibarr_mailing_limit_sendbyweb='0';
 		EOF
 
-	#chown apache:root /var/www/html/conf/conf.php
+	chown apache:root /var/www/html/conf/conf.php
 	chmod 666 /var/www/html/conf/conf.php
 fi
 
