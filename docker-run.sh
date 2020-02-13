@@ -38,7 +38,6 @@ rm -r /var/www/html/conf
 
 # Create a default config
 #if [ ! -f /var/www/html/conf/conf.php ]; then
-if [ -f /var/www/html/conf/conf.php ]; then
 	echo "###### Creating /var/www/html/conf/conf.php"
 
 	cat <<-EOF > /var/www/html/conf/conf.php
@@ -91,9 +90,9 @@ if [ -f /var/www/html/conf/conf.php ]; then
 
 	#chown apache:root /var/www/html/conf/conf.php
 	chmod 7777 /var/www/html/conf/conf.php
-fi
+#fi
 
-if [ ! -f /var/www/documents/install.lock ]; then
+#if [ ! -f /var/www/documents/install.lock ]; then
 		# Create forced values for first install
 		cat <<-EOF > /var/www/html/install/install.forced.php
 			<?php
@@ -158,6 +157,6 @@ if [ ! -f /var/www/documents/install.lock ]; then
 			EOF
 
 		echo "You shall complete Dolibarr install manually at '${DOLI_URL_ROOT}/install'"
-	fi
+	#fi
 
 exec apache2-foreground
