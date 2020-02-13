@@ -155,4 +155,24 @@ EOF
 
 echo "You shall complete Dolibarr install manually at '${DOLI_URL_ROOT}/install'"
 
+echo "Installing Dolibarr ... "
+
+php /var/www/html/install2/check.php \
+&& php /var/www/html/install2/step1.php '' pt_BR \
+  /var/www/html \
+  /var/www/documents \
+  ${DOLI_URL_ROOT} \
+  ${DOLI_DB_ROOT_LOGIN} \
+  ${DOLI_DB_ROOT_PASSWORD} \
+  ${DOLI_DB_TYPE} \
+  ${DOLI_DB_HOST} \
+  ${DOLI_DB_NAME} \
+  ${DOLI_DB_USER} \
+  ${DOLI_DB_PASSWORD} \
+  ${DOLI_DB_PORT} \
+  ${DOLI_DB_PREFIX} \
+&& /var/www/html/install2/step2.php '' pt_BR \
+&& /var/www/html/install2/step4.php pt_BR \
+&& /var/www/html/install2/step4.php '' '' pt_BR \
+
 exec apache2-foreground
