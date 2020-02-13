@@ -37,7 +37,8 @@ rm -r /var/www/html/conf
 #fi
 
 # Create a default config
-if [ ! -f /var/www/html/conf/conf.php ]; then
+#if [ ! -f /var/www/html/conf/conf.php ]; then
+if [ -f /var/www/html/conf/conf.php ]; then
 	echo "###### Creating /var/www/html/conf/conf.php"
 
 	cat <<-EOF > /var/www/html/conf/conf.php
