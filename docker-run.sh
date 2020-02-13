@@ -26,13 +26,6 @@ if [ ! -f /usr/local/etc/php/php.ini ]; then
 		EOF
 fi
 
-if [ ! -d /var/www/documents ]; then
-  echo "###### Creating dir /var/www/documents"
-  #rm -r /var/www/documents
-  mkdir -p /var/www/documents
-  chmod g+rwx /var/www/documents
-fi
-
 echo "###### Creating dir /var/www/html/conf/"
 rm -r /var/www/html/conf
 
