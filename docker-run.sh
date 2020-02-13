@@ -32,15 +32,9 @@ fi
 echo "###### Creating dir /var/www/html/conf/"
 rm -r /var/www/html/conf
 
-#if [ ! -d /var/www/html/conf ]; then
 mkdir -p /var/www/html/conf
 chmod g+rwx /var/www/html/conf
-#	chown apache:root /var/www/html/conf
-#	chmod 750 /var/www/html/conf
-#fi
 
-# Create a default config
-#if [ ! -f /var/www/html/conf/conf.php ]; then
 echo "###### Creating /var/www/html/conf/conf.php"
 
 cat <<-EOF > /var/www/html/conf/conf.php
@@ -91,12 +85,8 @@ cat <<-EOF > /var/www/html/conf/conf.php
   \$dolibarr_mailing_limit_sendbyweb='0';
 EOF
 
-#chown apache:root /var/www/html/conf/conf.php
 chmod 7777 /var/www/html/conf/conf.php
-#fi
 
-#if [ ! -f /var/www/documents/install.lock ]; then
-# Create forced values for first install
 cat <<-EOF > /var/www/html/install/install.forced.php
   <?php
   // Forced install config file for Dolibarr ${DOLI_VERSION} ($(date))
@@ -160,6 +150,5 @@ cat <<-EOF > /var/www/html/install/install.forced.php
 EOF
 
 echo "You shall complete Dolibarr install manually at '${DOLI_URL_ROOT}/install'"
-#fi
 
 exec apache2-foreground
