@@ -26,7 +26,7 @@ services:
         networks:
             - default
         environment: 
-            DOLI_DB_HOST: edmos_db 
+            DOLI_DB_HOST: edmos-db 
             DOLI_DB_USER: edmoserp
             DOLI_DB_PASSWORD: edmoserp@2020
             DOLI_DB_NAME: edmerpdb
