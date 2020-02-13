@@ -3,11 +3,6 @@
 usermod -u $HOST_USER_ID www-data
 groupmod -g $HOST_USER_ID www-data
 
-echo "###### Creating dir /var/www/documents"
-rm -r /var/www/documents
-mkdir -p /var/www/documents
-chmod g+rwx /var/www/documents
-
 chgrp -hR www-data /var/www/html
 
 if [ ! -f /usr/local/etc/php/php.ini ]; then
@@ -29,6 +24,13 @@ if [ ! -f /usr/local/etc/php/php.ini ]; then
     xdebug.profiler_enable=0
     xdebug.remote_log="/tmp/xdebug.log"
 		EOF
+fi
+
+if [ ! -d /var/www/documents ]; then
+  echo "###### Creating dir /var/www/documents"
+  #rm -r /var/www/documents
+  mkdir -p /var/www/documents
+  chmod g+rwx /var/www/documents
 fi
 
 echo "###### Creating dir /var/www/html/conf/"
@@ -162,6 +164,6 @@ cat <<-EOF > /var/www/html/install/install.forced.php
 EOF
 
 echo "You shall complete Dolibarr install manually at '${DOLI_URL_ROOT}/install'"
-	#fi
+#fi
 
 exec apache2-foreground
