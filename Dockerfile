@@ -59,11 +59,13 @@ RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libldap2-dev lib
 
 VOLUME /var/www/html
 VOLUME /var/www/documents
+VOLUME /var/www/scripts
 
 COPY docker-run.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-run.sh
 
 COPY htdocs/ /var/www/html
+COPY scripts/ /var/www/scripts
 
 RUN pecl install xdebug && docker-php-ext-enable xdebug
 RUN echo '172.17.0.1 docker.host' >> /etc/hosts

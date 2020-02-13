@@ -5,8 +5,10 @@ groupmod -g $HOST_USER_ID www-data
 
 chgrp -hR www-data /var/www/html
 chgrp -hR www-data /var/www/documents
+chgrp -hR www-data /var/www/scripts
 
 chmod g+rwx /var/www/documents
+chmod g+rwx /var/www/scripts
 
 if [ ! -f /usr/local/etc/php/php.ini ]; then
 	cat <<-EOF > /usr/local/etc/php/php.ini

@@ -40,6 +40,7 @@ services:
         volumes: 
             - dolibarr_html:/var/www/html
             - dolibarr_docs:/var/www/documents
+            - dolibarr_scripts:/var/www/scripts
 
 networks:
     default:
@@ -47,4 +48,5 @@ networks:
 volumes: 
     dolibarr_html:
     dolibarr_docs:
+    dolibarr_scripts:
     dolibarr_db:
