@@ -10,6 +10,8 @@ chgrp -hR www-data /var/www/scripts
 chmod g+rwx /var/www/documents
 chmod g+rwx /var/www/scripts
 
+echo "###### Setting up php.ini"
+
 if [ ! -f /usr/local/etc/php/php.ini ]; then
 	cat <<-EOF > /usr/local/etc/php/php.ini
 		date.timezone = "${PHP_INI_DATE_TIMEZONE}"
